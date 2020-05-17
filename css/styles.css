@@ -473,6 +473,11 @@ mark,
   height: auto;
 }
 
+.img-scale {
+  width: 50%;
+  height: 50%;
+}
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
