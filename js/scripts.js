@@ -48,4 +48,25 @@
         }, { rootMargin: '-12% 0px -55% 0px', threshold: [0, 0.1, 0.35, 0.7, 1] });
         targets.forEach(function (t) { observer.observe(t); });
     }
+
+    /* long lists: five entries up front, the rest behind a toggle */
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var toggles = document.querySelectorAll('.list-toggle');
+    Array.prototype.forEach.call(toggles, function (btn) {
+        var list = document.getElementById(btn.getAttribute('aria-controls') || '');
+        if (!list) { return; }
+        var clipped = list.querySelectorAll('.entry.is-clipped');
+        if (!clipped.length) { return; }
+        btn.addEventListener('click', function () {
+            var expand = btn.getAttribute('aria-expanded') !== 'true';
+            btn.setAttribute('aria-expanded', expand ? 'true' : 'false');
+            btn.textContent = expand ? btn.getAttribute('data-less') : btn.getAttribute('data-more');
+            Array.prototype.forEach.call(clipped, function (entry) {
+                entry.classList.toggle('is-clipped', !expand);
+            });
+            if (!expand && btn.getBoundingClientRect().top < 0) {
+                btn.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+            }
+        });
+    });
 })();

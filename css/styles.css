@@ -429,6 +429,57 @@ a:hover { color: var(--navy-soft); text-decoration-color: var(--gold); }
     color: var(--muted);
 }
 
+/* ------------------------------------------- progressive disclosure ---- */
+/* Long lists (publications, grants, ...) open at five entries. The clipped
+   state lives in the markup and is only honoured when scripting runs, so
+   no-JS and print output still contain every entry. */
+
+html.js .entry.is-clipped { display: none; }
+html:not(.js) .list-toggle-wrap { display: none; }
+
+.list-toggle-wrap {
+    margin: 1.05rem 0 0;
+    padding: 0.9rem 0 0 8.75rem;          /* aligns with the entry text column */
+    border-top: 1px solid var(--rule);
+}
+
+.list-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 44px;
+    padding: 0.6rem 0;
+    margin: 0;
+    background: none;
+    border: 0;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.list-toggle::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translate(-1px, -1px);
+    transition: transform 0.18s ease;
+}
+
+.list-toggle[aria-expanded="true"]::after { transform: rotate(-135deg) translate(-1px, -1px); }
+.list-toggle:hover { color: var(--gold); text-decoration: underline; text-underline-offset: 0.28em; }
+.list-toggle:hover::after { border-color: currentColor; }
+
+@media (max-width: 640px) {
+    .list-toggle-wrap { padding-left: 0; }
+    .list-toggle { letter-spacing: 0.1em; }
+}
+
 /* ------------------------------------------------------------ to top ---- */
 
 .to-top {
@@ -501,6 +552,8 @@ a:hover { color: var(--navy-soft); text-decoration-color: var(--gold); }
     .section + .section { border-top: 1px solid #bbb; }
     .section-head { font-size: 13pt; margin-bottom: 0.6rem; }
     .entry { break-inside: avoid; padding: 0.35rem 0; }
+    .entry.is-clipped { display: grid !important; }
+    .list-toggle-wrap { display: none !important; }
     .entry-title { font-size: 10.5pt; }
     a { color: #000; text-decoration: none; }
     a[href^="http"]::after { content: ""; }
