@@ -49,6 +49,14 @@
         targets.forEach(function (t) { observer.observe(t); });
     }
 
+    /* CV export: hand the page to the browser's print pipeline, which the
+       print stylesheet renders as a paginated A4 CV (selectable text,
+       every clipped entry revealed) */
+    var cvButton = document.querySelector('.cv-button');
+    if (cvButton) {
+        cvButton.addEventListener('click', function () { window.print(); });
+    }
+
     /* long lists: five entries up front, the rest behind a toggle */
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var toggles = document.querySelectorAll('.list-toggle');

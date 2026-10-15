@@ -155,6 +155,67 @@ a:hover { color: var(--navy-soft); text-decoration-color: var(--gold); }
     transform: rotate(45deg);
 }
 
+/* --------------------------------------------------------- pdf export ---- */
+
+.masthead-inner { position: relative; }
+
+.cv-actions {
+    position: absolute;
+    top: 3.4rem;
+    right: 1.5rem;
+    margin: 0;
+    text-align: right;
+    max-width: 17.5rem;
+}
+
+.cv-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0.7rem 1.15rem;
+    background: transparent;
+    border: 1px solid var(--navy);
+    color: var(--navy);
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.cv-button:hover { background: var(--navy); color: var(--paper); }
+.cv-arrow { font-size: 0.95rem; line-height: 1; }
+
+.cv-hint {
+    display: block;
+    margin: 0.55rem 0 0;
+    font-family: var(--sans);
+    font-size: 0.66rem;
+    line-height: 1.55;
+    color: var(--muted);
+}
+
+.cv-noscript {
+    position: absolute;
+    top: 3.4rem;
+    right: 1.5rem;
+    max-width: 16rem;
+    text-align: right;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .cv-actions, .cv-noscript {
+        position: static;
+        text-align: left;
+        max-width: none;
+        margin-top: 1.6rem;
+    }
+    .cv-hint { margin-top: 0.5rem; }
+}
+
 /* -------------------------------------------------------------- shell ---- */
 
 .shell {
@@ -540,17 +601,24 @@ html:not(.js) .list-toggle-wrap { display: none; }
 
 /* -------------------------------------------------------------- print ---- */
 
+@page { size: A4; margin: 14mm 16mm; }
+
 @media print {
     :root { --paper: #fff; --paper-tint: #fff; }
     body { font-size: 10.5pt; line-height: 1.45; color: #000; }
-    .toc, .to-top, .skip-link, .masthead-contact { display: none; }
-    .masthead { border-top: 0; border-bottom: 1px solid #999; }
-    .masthead-inner, .shell { max-width: none; padding: 0; }
+    .toc, .to-top, .skip-link, .cv-actions, .cv-noscript { display: none; }
+    .masthead { border-top: 0; border-bottom: 1px solid #999; background: #fff; }
+    .name { color: #000; }
+    .masthead-inner { max-width: none; padding: 0 0 1rem; }
+    .shell { max-width: none; padding: 1.4rem 0 0; }
     .shell { display: block; }
-    .name { font-size: 20pt; }
+    .name { font-size: 19pt; max-width: none; }
     .section { padding-top: 1.2rem; break-inside: auto; }
     .section + .section { border-top: 1px solid #bbb; }
-    .section-head { font-size: 13pt; margin-bottom: 0.6rem; }
+    .section-head { font-size: 13pt; margin-bottom: 0.6rem; break-after: avoid-page; }
+    .sub-head { break-after: avoid-page; }
+    .masthead-contact { font-size: 8.5pt; }
+    .masthead-contact li + li::before { background: #999; }
     .entry { break-inside: avoid; padding: 0.35rem 0; }
     .entry.is-clipped { display: grid !important; }
     .list-toggle-wrap { display: none !important; }
