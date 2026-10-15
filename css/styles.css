@@ -601,16 +601,25 @@ html:not(.js) .list-toggle-wrap { display: none; }
 
 /* -------------------------------------------------------------- print ---- */
 
-@page { size: A4; margin: 14mm 16mm; }
+@page { size: A4; margin: 12mm 14mm; }
 
 @media print {
     :root { --paper: #fff; --paper-tint: #fff; }
-    body { font-size: 10.5pt; line-height: 1.45; color: #000; }
+    body {
+        font-size: 10.5pt;
+        line-height: 1.45;
+        color: #000;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
     .toc, .to-top, .skip-link, .cv-actions, .cv-noscript { display: none; }
     .masthead { border-top: 0; border-bottom: 1px solid #999; background: #fff; }
     .name { color: #000; }
-    .masthead-inner { max-width: none; padding: 0 0 1rem; }
-    .shell { max-width: none; padding: 1.4rem 0 0; }
+    /* own padding, so the output is identical whether the print dialog asks
+       for margins, none, or minimum */
+    .masthead-inner { max-width: none; padding: 6mm 8mm 4mm; }
+    .shell { max-width: none; padding: 5mm 8mm 0; }
+    .role, .affiliation { max-width: none; }
     .shell { display: block; }
     .name { font-size: 19pt; max-width: none; }
     .section { padding-top: 1.2rem; break-inside: auto; }
