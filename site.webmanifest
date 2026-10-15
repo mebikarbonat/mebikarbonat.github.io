@@ -1,1 +1,21 @@
-{"name":"","short_name":"","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+  "name": "Muhammad Azizi Mohd Ariffin - Senior Lecturer, UiTM Shah Alam",
+  "short_name": "M Azizi",
+  "description": "Academic profile and CV of Muhammad Azizi Mohd Ariffin: network traffic classification, cybersecurity, federated learning and IoT.",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#16324f",
+  "background_color": "#fbfaf7",
+  "display": "standalone"
+}
